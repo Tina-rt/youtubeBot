@@ -30,7 +30,7 @@ ACCESS_TOKEN = 'EAAGoQuCCAo8BAIoE9ZCChkBlvuR3Radvmdky3pgr41dQZAQLqNhX6jI3SG301ER
 URL = 'https://graph.facebook.com/v2.6/me/messages?access_token='+ACCESS_TOKEN
 # myUrl = 'https://htbot2001.herokuapp.com'
 myUrl = 'https://tinatina.pythonanywhere.com/'
-# myUrl = 'https://998a1cbff7e0.ngrok.io'
+# myUrl = 'https://4f43664a43bb.ngrok.io'
 
 
 def typing_on(dest_id):
@@ -95,14 +95,32 @@ def webhook():
                         # pp(list_video)
                         if len(list_video) > 0:
 
-                            send_video_suggestion(sender_id, list_video, 1, query)
+                            send_video_suggestion(dest_id=sender_id, list_video=list_video, page=1, query=query)
                             typing_off(sender_id)
                 if 'quick_reply' in messaging_event['message']:
-                	payload = messaging_event['message']['quick_reply']['payload']
-                	payload = json.loads(payload)
-                	print(payload['page'])
-                	page = payload['page']
-                	list_video = getListVideo()
+                    payload = messaging_event['message']['quick_reply']['payload']
+                    if is_json(payload):
+                        payload = json.loads(payload)
+                        if 'page' in payload:
+                            print(payload['page'])
+                            page = payload['page']
+                            query = payload['query']
+                            list_video = getListVideo(query, page)
+                            if len(list_video) > 0:
+                                send_video_suggestion(dest_id=sender_id, list_video=list_video, page=page, query=query)
+                                typing_off(sender_id)
+                            else:
+                                send_response_quickreply(sender_id, 'Fin des resultats', [{
+                                    'content_type': 'text',
+                                    'title': 'Autre recherche',
+                                    'payload': json.dumps({
+                                        'autre_recherche': 'true'
+                                    })
+                                    }])
+                                typing_off(sender_id)
+                        elif 'autre_recherche' in payload:
+                            sendText(sender_id, 'Tapez votre recherche...')
+                            typing_off(sender_id)
 
             elif 'postback' in messaging_event:
                 if 'payload' in messaging_event['postback']:
@@ -271,7 +289,7 @@ def send_response_quickreply(dest_id, reply, payloads):
 	  },
 	  "messaging_type": "RESPONSE",
 	  "message":{
-	    # "text": f"{reply}",
+	    "text": f"{reply}",
 	    "quick_replies": payloads
 	    
 	  }
@@ -280,7 +298,7 @@ def send_response_quickreply(dest_id, reply, payloads):
 	r = requests.post(URL, data=json.dumps(data), headers=headers)
 	print(r.content)
 
-def send_video_suggestion(dest_id, list_video, page):
+def send_video_suggestion(dest_id='', list_video=[], page=1, query=''):
     typing_on(dest_id)
     current_list_video = list_video[:4]
     print(current_list_video)

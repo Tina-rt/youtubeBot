@@ -3,10 +3,12 @@ from pprint import pprint as pp
 from Video import *
 from pytube import YouTube
 import os
+from algo import *
 class FileSizeOver(Exception):
 	pass
 
 def getListVideo(kw, page):
+    n = 4
     engine = VideosSearch(kw, limit=8)
     listVideo = []
     # pp(engine.result()['result'])
@@ -22,7 +24,7 @@ def getListVideo(kw, page):
                     'publishedTime':video['publishedTime'],
                     'duration': video['duration']
                     })
-    return listVideo
+    return show(listVideo, page, n)
 
 def downloadVideo(url, filename) -> str:
     print(url)
