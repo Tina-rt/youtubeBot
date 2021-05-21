@@ -25,11 +25,12 @@ def isGreetings(s):
 			return True
 	return False
 
-# ACCESS_TOKEN = 'EAAGoQuCCAo8BAL6pz3lC9IJMc0bDJrqCbfP4f8cau9Y67rZCHjJ2BaGHsQXgmj91kvROfffBQ5JMgACZCIjnafyALFPyyxvZAcBtGQO5PNo2OXpUY2TmDZCxZBnIkhZBbnxKjjZADVNdP8hJlrUCRvYO8RLHorcWyyHO9AqT1uZCKd2R5kgK3Tk6'
-ACCESS_TOKEN = 'EAA1wRuSPHuIBADjv4nmhWBWzFn78QFffqXZAyf5Sy0oxfH8F21Pqc3IRyURuHmADUNBJ5WqaJsoEelSFyzaLZAIZBuZAYHwaDZBNnAwRp7OFmkEYZCM7Yq9iYLXhKZANFtS5rEiySIeCZCIZAF6xZCaGDcGYnOxj1klR49VY861VS38wNl27LMromP'
+ACCESS_TOKEN = 'EAAGoQuCCAo8BAIoE9ZCChkBlvuR3Radvmdky3pgr41dQZAQLqNhX6jI3SG301ERjZBQoV8sQU2kP7N68ffRRZCJv1nzDPFSyxiD97nWmhXY7ov3ZAc3F6SbWZCnIEgb9de7F5DnZBSZC2PJrsYUZC11dCRz1WRNY3miIsQcU4BFIZAmfK6b3RtsZCSZC'
+# ACCESS_TOKEN = 'EAA1wRuSPHuIBADjv4nmhWBWzFn78QFffqXZAyf5Sy0oxfH8F21Pqc3IRyURuHmADUNBJ5WqaJsoEelSFyzaLZAIZBuZAYHwaDZBNnAwRp7OFmkEYZCM7Yq9iYLXhKZANFtS5rEiySIeCZCIZAF6xZCaGDcGYnOxj1klR49VY861VS38wNl27LMromP'
 URL = 'https://graph.facebook.com/v2.6/me/messages?access_token='+ACCESS_TOKEN
 # myUrl = 'https://htbot2001.herokuapp.com'
-myUrl = 'https://998a1cbff7e0.ngrok.io'
+myUrl = 'https://tinatina.pythonanywhere.com/'
+# myUrl = 'https://998a1cbff7e0.ngrok.io'
 
 
 def typing_on(dest_id):
