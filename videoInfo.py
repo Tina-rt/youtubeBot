@@ -53,7 +53,7 @@ def downloadAudio(url, filename):
         raise FileSizeOver("File is over than 25mb")
     st.download(filename=filename)
     os.rename(f'{filename}.mp4', f'{filename}.mp3')
-    
+downloadVideo('https://www.youtube.com/watch?v=S3m5wbjes-M', 'test')
 
 # downloadAudio('https://www.youtube.com/watch?v=LV95aCwGswM', 'audio')
 # downloadAudio()
